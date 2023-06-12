@@ -1,0 +1,9 @@
+{
+    "winning_move": 1.5,
+    "blocking_opponent": 1.0,
+    "creating_forks": 0.8,
+    "blocking_forks": 0.6,
+    "center_move": 0.4,
+    "corner_move": 0.3,
+    "side_move": 0.2
+}

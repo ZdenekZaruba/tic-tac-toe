@@ -25,17 +25,11 @@ $gameData['board'] = $board;
 // Odstranění klíče "playerMoves" z herních dat
 unset($gameData['playerMoves']);
 
-// Přidání klíče "playerWon" podle výsledku hry
-if ($gameData['result'] === 'X') {
-    $gameData['playerWon'] = ['X'];
-} elseif ($gameData['result'] === 'O') {
-    $gameData['playerWon'] = ['O'];
-} else {
-    $gameData['playerWon'] = ['draw'];
-}
-
 // Přidání nového záznamu do pole historie
-$history[$newKey] = $gameData;
+$history[$newKey] = [
+    'board' => $gameData['board'],
+    'result' => $gameData['result']
+];
 
 // Uložení aktualizovaného pole historie do souboru history.json
 $historyString = json_encode($history, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

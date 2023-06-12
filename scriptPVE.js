@@ -17,14 +17,14 @@ board.addEventListener('click', function (event) {
         // Kontrola výhry
         if (checkWin()) {
             alert('Hráč ' + currentPlayer + ' vyhrál!');
-            endGame();
+            endGame(currentPlayer);
             return;
         }
 
         // Kontrola remízy
         if (checkDraw()) {
             alert('Remíza!');
-            endGame();
+            endGame('draw');
             return;
         }
 
@@ -45,7 +45,7 @@ function switchPlayer() {
 function checkWin() {
     var cells = document.querySelectorAll('.board td');
 
-    // Kontrola horizontálních řádků
+    // Kontrola výhry - horizontální řádky
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 8; j++) {
             var currentCell = cells[i * 10 + j];
@@ -62,7 +62,7 @@ function checkWin() {
         }
     }
 
-    // Kontrola vertikálních sloupců
+    // Kontrola výhry - vertikální sloupce
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 10; j++) {
             var currentCell = cells[i * 10 + j];
@@ -79,7 +79,7 @@ function checkWin() {
         }
     }
 
-    // Kontrola diagonál zleva doprava
+    // Kontrola výhry - diagonály zleva doprava
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 8; j++) {
             var currentCell = cells[i * 10 + j];
@@ -96,7 +96,7 @@ function checkWin() {
         }
     }
 
-    // Kontrola diagonál zprava doleva
+    // Kontrola výhry - diagonály zprava doleva
     for (var i = 0; i < 8; i++) {
         for (var j = 2; j < 10; j++) {
             var currentCell = cells[i * 10 + j];
@@ -129,7 +129,7 @@ function checkDraw() {
     return true;
 }
 
-function endGame() {
+function endGame(result) {
     // Získání herního pole
     var cells = document.querySelectorAll('.board td');
 
@@ -138,7 +138,9 @@ function endGame() {
     // Vytvoření objektu s daty konce hry
     var gameData = {
         board: [],
-        playerMoves: []
+        playerMoves: [],
+        result: result,
+        playerWon: result === 'draw' ? ['draw'] : [currentPlayer] // Upravený zápis
     };
 
     // Uložení herního pole do objektu
@@ -227,4 +229,32 @@ function makeAITurn() {
         // Přepnutí hráče
         switchPlayer();
     }
+}
+
+// Funkce pro uložení momentálního stavu pole do souboru
+function saveCurrentBoard() {
+    var cells = document.querySelectorAll('.board td');
+    var currentBoard = [];
+
+    // Uložení stavu políček do pole
+    for (var i = 0; i < cells.length; i++) {
+        currentBoard.push(cells[i].innerHTML);
+    }
+
+    // Uložení do souboru currentBoard.json
+    var json = JSON.stringify(currentBoard);
+    fetch('currentBoard.json', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: json,
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Momentální stav pole uložen:', data);
+        })
+        .catch(error => {
+            console.error('Chyba při ukládání momentálního stavu pole:', error);
+        });
 }
