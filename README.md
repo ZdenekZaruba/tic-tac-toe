@@ -22,6 +22,8 @@ Na základě hráčů vkládá do herního pole znaky "X" a "O". Dále po každ�
 
 ![Alt text](image.png)
 
+------------------
+
 ## game_pve.php, ai.php, scriptPVE.js, history.php, history.json, board.json a currentBoard.json
 
 ### game_pvp.php
