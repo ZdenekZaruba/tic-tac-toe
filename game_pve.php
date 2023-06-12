@@ -13,6 +13,9 @@
   echo $board;
   ?>
 
+  <br /><br />
+  <button><a href="index.php">Hlavní stránka</a></button>
+
   <script src="scriptPVE.js"></script>
 </body>
 </html>
