@@ -6,7 +6,9 @@
 </head>
 <body>
   <h1>Vítejte ve hře Piskvorky!</h1>
-  <a href="game_pvp.php">Hrát PVP</a>
-  <a href="game_pve.php">Hrát PVE</a>
+  <div class="center">
+    <a href="game_pvp.php">Hrát PVP</a>
+    <a href="game_pve.php">Hrát PVE</a>
+  </div>
 </body>
 </html>

@@ -6,15 +6,17 @@
 </head>
 <body>
   <h1>PVE Game</h1>
+  <div class="center">
+    <?php
+    require_once 'functions.php';
+    $board = generateBoard(10, 10);
+    echo $board;
+    ?>
 
-  <?php
-  require_once 'functions.php';
-  $board = generateBoard(10, 10);
-  echo $board;
-  ?>
+    <br /><br />
+    <a href="index.php">Hlavní stránka</a>
+  </div>
 
-  <br /><br />
-  <button><a href="index.php">Hlavní stránka</a></button>
 
   <script src="scriptPVE.js"></script>
 </body>
